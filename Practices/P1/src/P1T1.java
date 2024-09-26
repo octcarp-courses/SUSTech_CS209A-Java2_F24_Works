@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Main {
+public class P1T1 {
     public static void main(String[] args) {
         systemMain();
     }
@@ -28,7 +28,7 @@ public class Main {
 
                         System.out.println("Add new employee:" + employee + "Press y/N");
                         String check = input.next();
-                        if (check.equals("y")) {
+                        if (check.equals("y") || check.equals("Y")) {
                             manageSystem.addEmployee(employee);
                         } else {
                             System.out.println("Cancel addition");
@@ -41,6 +41,8 @@ public class Main {
                         break;
                     case 3:
                         manageSystem.printEmployeesByAlphabet();
+                        break;
+                    case 0:
                         break;
                     default:
                         System.out.println("Illegal option input!");
