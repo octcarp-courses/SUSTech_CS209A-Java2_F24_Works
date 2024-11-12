@@ -1,4 +1,4 @@
-package org.octcarp.p2t2;
+package io.github.octcarp.sustech.cs209a.practice.p2t2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ public class P2T2 {
         HashMap<String, Integer> freq = new HashMap<>();
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
-            File alice = new File(Objects.requireNonNull(classLoader.getResource("alice.txt")).getFile());
+            File alice = new File(Objects.requireNonNull(classLoader.getResource("p2t2/alice.txt")).getFile());
             Scanner scanner = new Scanner(alice);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

@@ -1,8 +1,9 @@
 package p4t2;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
@@ -10,69 +11,97 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class CityAnalysis {
-    public static class City {
-        private String name;
-        private String state;
-        private int population;
-
-        public City(String name, String state, int population) {
-            this.name = name;
-            this.state = state;
-            this.population = population;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getState() {
-            return state;
-        }
-
-        public int getPopulation() {
-            return population;
-        }
-
-        @Override
-        public String toString() {
-            return "City{name='" + name + "', state='" + state + "', population=" + population + "}";
-        }
-    }
-
-    public static Stream<City> readCities(String filename) throws IOException {
-        return Files.lines(Paths.get(filename))
-                .map(l -> l.split(", "))
-                .map(a -> new City(a[0], a[1], Integer.parseInt(a[2])));
-    }
+public class P4T2 {
 
     public static void main(String[] args) throws IOException {
+        CityAnalysis cityAnalysis = new CityAnalysis();
+
+        cityAnalysis.printResult();
+    }
+}
+
+class City {
+    private String name;
+    private String state;
+    private int population;
+
+    public City(String name, String state, int population) {
+        this.name = name;
+        this.state = state;
+        this.population = population;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    @Override
+    public String toString() {
+        return "City{name='" + name + "', state='" + state + "', population=" + population + "}";
+    }
+}
+
+class CityAnalysis {
+
+    private static Stream<City> readCities() {
+        try {
+            String fileName = "p4t2/cities.txt";
+            Path path = Path.of(CityAnalysis.class.getClassLoader().getResource(fileName).toURI());
+            return Files.lines(path)
+                    .map(l -> l.split(", "))
+                    .map(a -> new City(a[0], a[1], Integer.parseInt(a[2])));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return Stream.empty();
+    }
+
+    private Map<String, Long> cityCountPerState;
+
+    private Map<String, Integer> statePopulation;
+
+    private Map<String, String> longestCityNameByState;
+
+    private Map<String, Set<City>> largeCitiesByState;
+
+
+    CityAnalysis() {
 
         Stream<City> cities;
 
-        cities = readCities("p4/src/p4t2/cities.txt");
+        cities = readCities();
         // Q1: count how many cities there are for each state
-        Map<String, Long> cityCountPerState =
+        cityCountPerState =
                 cities.collect(Collectors.groupingBy(City::getState, Collectors.counting()));
 
 
-        cities = readCities("p4/src/p4t2/cities.txt");
+        cities = readCities();
         // Q2: count the total population for each state
-        Map<String, Integer> statePopulation =
+        statePopulation =
                 cities.collect(Collectors.groupingBy(City::getState, Collectors.summingInt(City::getPopulation)));
 
 
-        cities = readCities("p4/src/p4t2/cities.txt");
+        cities = readCities();
         // Q3: for each state, get the city with the longest name
-        Map<String, String> longestCityNameByState = cities.collect(Collectors.groupingBy(City::getState,
+        longestCityNameByState = cities.collect(Collectors.groupingBy(City::getState,
                 Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(c -> c.getName().length())),
                         c -> c.map(City::getName).orElse(""))));
 
-        cities = readCities("p4/src/p4t2/cities.txt");
+        cities = readCities();
         // Q4: for each state, get the set of cities with >500,000 population
-        Map<String, Set<City>> largeCitiesByState = cities.collect(Collectors.groupingBy(City::getState,
+        largeCitiesByState = cities.collect(Collectors.groupingBy(City::getState,
                 Collectors.filtering(c -> c.getPopulation() > 500_000, Collectors.toSet())));
+    }
 
+    void printResult() {
         StringBuilder sb;
         System.out.println("Q1: # of cities per state:");
         sb = new StringBuilder("{");

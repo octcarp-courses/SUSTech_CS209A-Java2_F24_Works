@@ -1,4 +1,4 @@
-package org.octcarp.p2t1;
+package io.github.octcarp.sustech.cs209a.practice.p2t1;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;

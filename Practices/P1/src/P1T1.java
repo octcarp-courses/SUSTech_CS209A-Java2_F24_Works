@@ -15,7 +15,13 @@ public class P1T1 {
 
         int op = 0;
         do {
-            System.out.println("Please select operation: 1.Add Employee 2.Delete Employee 3. Print Info 0.Exit");
+            System.out.println("""
+                    \nPlease select operation:
+                    1.Add Employee
+                    2.Delete Employee
+                    3. Print Info
+                    0.Exit
+                    """);
             try {
                 op = input.nextInt();
                 switch (op) {

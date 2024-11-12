@@ -5,11 +5,14 @@ import java.nio.charset.StandardCharsets;
 
 public class P5T1 {
     public static void main(String[] args) {
-        String inputFilePath = "input.txt";
-        String outputFilePath = "output.txt";
+        String inputFilePath = "p5t1/input.txt";
+        String outputFilePath = "p5t1/output.txt";
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFilePath), StandardCharsets.UTF_8));
-             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFilePath), StandardCharsets.UTF_16))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                P5T1.class.getClassLoader().getResourceAsStream(inputFilePath), StandardCharsets.UTF_8));
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                     new FileOutputStream(P5T1.class.getClassLoader().getResource(outputFilePath).getFile()),
+                     StandardCharsets.UTF_16))) {
 
             String line;
             while ((line = reader.readLine()) != null) {
