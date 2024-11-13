@@ -1,0 +1,5 @@
+This folder should be like:
+├─resources
+│      .gitkeep
+│      rt.jar
+│      src.zip
