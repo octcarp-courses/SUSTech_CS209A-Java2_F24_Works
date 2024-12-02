@@ -1,0 +1,4 @@
+[submodule "Assignment2"]
+	path = Assignment2/
+	url = https://github.com/OctCarp/SUSTech-CS209A-LinkGame
+	branch = java-backup

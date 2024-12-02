@@ -1,39 +1,74 @@
-# CS209A Assignment 2 Demo
+# SUSTech-CS209A-Linking-Game
 
-## Environment
+(JavaFX 23 + Java socket) Linking Game (a.k.a. “连连看”) using JavaFX 23 with simple online. 
 
-**java JDK**: openjdk-22 (Oracle OpenJDK 22.0.2)
+SUSTech CS209A 2024 Fall Assignment 2.
 
-**javafx-fxml**: 22.0.1
+### Documentation
 
-**javafx-controls**: 22.0.1
+- [requirement.pdf](docs/requirement.pdf)
+- [grading_criteria.xlsx](docs/grading_criteria.xlsx) or [grading_criteria_CHS.xlsx](grading_criteria_CHS.xlsx)
 
-**maven**: 3.8.5
+I completed both the basic and bonus features.
 
-## File List
+### About
 
-**Application.java**: the main entry point of the demo application
+A toy game. I wrote it almost in one go, and by the end the project structure was a little messy. 
 
-**Game.java**: manages the game logic and controls the game's behavior
+There may be some minor bugs, witch I don't have the energy to fix :((
 
-**Controller.java**: handles JavaFX UI interactions and events
+### Modules
 
-**board.fxml**: a game board prototype
+- [game-common](game-common/): common model for both client and server.
+    - controller: JavaFX `.fxml` file's controllers
+    - net: Singletons for managing a client's different kinds of data
 
-**resources**: stores pictures for the game board (https://www.iconfont.cn/)
+- [game-client](game-client/): JavaFX game client application
+    - model: Different models for C/S transmission through `ObjectI/OStream`
+    - packet: General `Request` / `Response` model
 
-## Logic
+- [game-server](game-server/): Java socket game server
+    - net: Singletons for managing different kinds of data for all clients
 
-- game start: allowing the user to select options and set up the game board
 
-- operations validity: monitoring user actions, validating operations, and updating the board
+### Login / Register
 
-- game finish: informing the user that the game has ended
+![login](docs/img/login.png)
 
-## Notes
+There are 3 pre-define users:
 
-I suggest that you first complete the single-player mode. If you feel confident, you can directly reconstruct this project to include a two-player mode.
+- "1" , "1"
+- "2" , "2"
+- "2" , "2"
 
-If you encounter any GUI issues while rendering multiple game boards, maybe you can check the $start$ method in the main entry point.
+### Main Menu
 
-If you have any questions or find any bugs, feel free to contact me 12442018@mail.sustech.edu.cn or QQ:503652093 :)
+![main_menu](docs/img/main_menu.png)
+
+### Start Matching (Lobby)
+
+![lobby](docs/img/lobby.png)
+
+### Choose Size
+
+A random player to choose size.
+
+![select_board](docs/img/select_board.png)
+
+### Link!
+
+Lines key frame animation for both players.
+
+You can shuffle for a new shape of grids.
+
+![link](docs/img/link.png)
+
+### Game Result
+
+![end](docs/img/end.png)
+
+### Match Record
+
+No beautification.
+
+![record](docs/img/record.png)

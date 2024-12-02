@@ -1,0 +1,9 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+*.png binary
+*.xlsx binary
+*.pdf binary
+
+# Custom for .fxml files
+*.fxml linguist-language=XML
