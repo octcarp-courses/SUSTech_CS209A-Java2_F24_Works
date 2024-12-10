@@ -4,4 +4,12 @@ Course work of CS209A 2024 Fall: Computer System Design and Applications A (a.k.
 
 ### Practices
 
-Weekly practice: [Practices/](Practices/)
+Weekly practice: [Practices](Practices/)
+
+### Assignment
+
+| ID                                                           | Content                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------- |
+| [Assignment 1](Assignment1/)                                 | Paralleled data analyzer for `.csv` file using `stream` |
+| [Assignment 2](https://github.com/OctCarp/SUSTech-CS209A-LinkGame/tree/java-backup) | Simple online JavaFX application                        |
+
