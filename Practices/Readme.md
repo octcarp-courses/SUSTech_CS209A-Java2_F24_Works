@@ -12,4 +12,5 @@
 | [Practice 8](P8)   | Multi threaded JDK 8 Text Analysis |
 | [Practice 9](P9)   | Java socket programming: HTTP requests and simple JavaFX Chat Room |
 | [Practice 10](P10) | Simple JavaFX Aircraft Battle |
-| [Practice 11](P11) | Summary and a sign in question |
+| [Practice 13](P13) | Annotation class implementation |
+| [Summary](Summary) | Summary and a sign in question |
