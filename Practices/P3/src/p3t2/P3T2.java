@@ -11,12 +11,13 @@ public class P3T2 {
 
         int op = 0;
         do {
-            System.out.println("""
-                    Please input the function no:
-                    1 - Get even numbers
-                    2 - Get odd numbers
-                    3 - Get prime numbers
-                    0 - Quit""");
+            System.out.print("""
+                Please input the function no:
+                1 - Get even numbers
+                2 - Get odd numbers
+                3 - Get prime numbers
+                0 - Quit
+                """);
             try {
                 try {
                     op = Integer.parseInt(input.nextLine());
@@ -82,6 +83,5 @@ class FilterUtil {
     public static <T> List<T> filter(List<T> list, MyPredicate<T> p) {
         return list.stream().filter(p::test).toList();
     }
-
 
 }

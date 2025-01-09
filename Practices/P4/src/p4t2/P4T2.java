@@ -56,8 +56,8 @@ class CityAnalysis {
             String fileName = "p4t2/cities.txt";
             Path path = Path.of(CityAnalysis.class.getClassLoader().getResource(fileName).toURI());
             return Files.lines(path)
-                    .map(l -> l.split(", "))
-                    .map(a -> new City(a[0], a[1], Integer.parseInt(a[2])));
+                .map(l -> l.split(", "))
+                .map(a -> new City(a[0], a[1], Integer.parseInt(a[2])));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
@@ -79,26 +79,42 @@ class CityAnalysis {
 
         cities = readCities();
         // Q1: count how many cities there are for each state
-        cityCountPerState =
-                cities.collect(Collectors.groupingBy(City::getState, Collectors.counting()));
+        cityCountPerState = cities.collect(
+            Collectors.groupingBy(City::getState, Collectors.counting())
+        );
 
 
         cities = readCities();
         // Q2: count the total population for each state
-        statePopulation =
-                cities.collect(Collectors.groupingBy(City::getState, Collectors.summingInt(City::getPopulation)));
+        statePopulation = cities.collect(
+            Collectors.groupingBy(
+                City::getState, Collectors.summingInt(City::getPopulation)
+            )
+        );
 
 
         cities = readCities();
         // Q3: for each state, get the city with the longest name
-        longestCityNameByState = cities.collect(Collectors.groupingBy(City::getState,
-                Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(c -> c.getName().length())),
-                        c -> c.map(City::getName).orElse(""))));
+        longestCityNameByState = cities.collect(
+            Collectors.groupingBy(City::getState,
+                Collectors.collectingAndThen(
+                    Collectors.maxBy(
+                        Comparator.comparingInt(c -> c.getName().length())
+                    ),
+                    c -> c.map(City::getName).orElse("")
+                )
+            )
+        );
 
         cities = readCities();
         // Q4: for each state, get the set of cities with >500,000 population
-        largeCitiesByState = cities.collect(Collectors.groupingBy(City::getState,
-                Collectors.filtering(c -> c.getPopulation() > 500_000, Collectors.toSet())));
+        largeCitiesByState = cities.collect(
+            Collectors.groupingBy(City::getState,
+                Collectors.filtering(
+                    c -> c.getPopulation() > 500_000, Collectors.toSet()
+                )
+            )
+        );
     }
 
     void printResult() {
